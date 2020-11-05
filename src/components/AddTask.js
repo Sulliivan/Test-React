@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import uniqid from 'uniqid';
+import { addTask } from '../actions';
 
-class AddTask extends React.Component{
-    
+class AddTask extends Component {
+
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.onAddTask(this.newTask.value)
+        let item = {
+            id: uniqid(),
+            name: this.newTask.value,
+            completed: false,
+        }
+        this.props.addTask(item)
         this.props.history.push('/')
     }
 
     render(){
-        return (
+        return(
             <section>
                 <h1 className="m-3">Nouvelle tâche</h1>
                 <div className="card mx-3">
@@ -22,8 +30,16 @@ class AddTask extends React.Component{
                     </form>
                 </div>
             </section>
-        )
-    }
+        )//end return in render
+    }//end render
 }
 
-export default AddTask
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTask: (item) => {
+            dispatch(addTask(item))
+        },
+    }
+}
+    
+export default connect(null, mapDispatchToProps)(AddTask);

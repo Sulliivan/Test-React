@@ -7,9 +7,9 @@ const data = {
 };
 
 export default function configureStore(initialState = data) {
-    return creatStore(
+    return createStore(
         rootReducer,
         initialState,
-        window._REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS__()
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 };
